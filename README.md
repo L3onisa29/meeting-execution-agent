@@ -64,7 +64,7 @@ pnpm verify
 Start local data services when needed:
 
 ```bash
-pnpm infra:local:up
+pnpm infra:up
 ```
 
 ## Service Commands
@@ -79,29 +79,40 @@ For the MVP flow, run the API and web app in separate terminals, then open the w
 
 ## Infrastructure Commands
 
-Local containers:
+Default local containers:
 
 ```bash
-pnpm infra:local:up       # start Postgres + Redis
-pnpm infra:local:stop     # stop containers, keep them created
-pnpm infra:local:down     # stop and remove containers, keep volumes
-pnpm infra:local:refresh  # pull images and recreate containers
-pnpm infra:local:reset    # remove containers and volumes
-pnpm infra:local:ps
-pnpm infra:local:logs
+pnpm infra:up       # start Postgres + Redis
+pnpm infra:stop     # stop containers, keep them created
+pnpm infra:down     # stop and remove containers, keep volumes
+pnpm infra:refresh  # pull images and recreate containers
+pnpm infra:reset    # remove containers and volumes
+pnpm infra:ps
+pnpm infra:logs
 ```
 
-VPS containers use the same compose file, but read `.env.vps` and use a fixed compose project name:
+The same commands run on a VPS. Set the target through env vars instead of using duplicated script names:
 
 ```bash
 cp .env.vps.example .env.vps
-pnpm infra:vps:up
-pnpm infra:vps:stop
-pnpm infra:vps:down
-pnpm infra:vps:refresh
-pnpm infra:vps:reset
-pnpm infra:vps:ps
-pnpm infra:vps:logs
+MEA_INFRA_TARGET=vps pnpm infra:up
+MEA_INFRA_TARGET=vps pnpm infra:stop
+MEA_INFRA_TARGET=vps pnpm infra:down
+MEA_INFRA_TARGET=vps pnpm infra:refresh
+MEA_INFRA_TARGET=vps pnpm infra:reset
+MEA_INFRA_TARGET=vps pnpm infra:ps
+MEA_INFRA_TARGET=vps pnpm infra:logs
+```
+
+Defaults:
+
+- local target: project name `meeting-execution-agent-local`, no forced env file
+- VPS target: project name `meeting-execution-agent-vps`, env file `.env.vps`
+
+Override when needed:
+
+```bash
+MEA_INFRA_PROJECT=my-project MEA_INFRA_ENV_FILE=.env.production pnpm infra:up
 ```
 
 By default, Postgres and Redis bind to `127.0.0.1` through `POSTGRES_PORT_BIND` and `REDIS_PORT_BIND`, which is the expected VPS posture unless a private network or firewall rule is configured.
