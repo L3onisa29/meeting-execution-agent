@@ -22,9 +22,12 @@ members = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["packages/agent-core/tests"]
+pythonpath = ["services/agent-api"]
+testpaths = [
+  "packages/agent-core/tests",
+  "services/agent-api/tests",
+]
 
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-

@@ -5,6 +5,7 @@ import {
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router'
+import { AppShell } from '../components/AppShell'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -25,7 +26,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <AppShell>
+        <Outlet />
+      </AppShell>
     </RootDocument>
   )
 }
@@ -43,4 +46,3 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     </html>
   )
 }
-

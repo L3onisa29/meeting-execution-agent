@@ -4,6 +4,20 @@ Production-ready portfolio project for turning meeting transcripts into structur
 
 The first version uses mocked external integrations while keeping the architecture ready for GitHub, Linear, Notion, Slack, or similar systems.
 
+## Current MVP
+
+The first working version supports:
+
+- transcript intake from the web app
+- synchronous FastAPI run creation
+- deterministic extraction of decisions, action items, risks, and follow-ups
+- proposed mock actions
+- approve/reject flow
+- mock external execution records
+- audit trail per run
+
+For local development, run state is stored in `.data/agent-api/runs.json`. Postgres and Redis are already scaffolded for the next persistence/queue phase.
+
 ## Stack
 
 - Frontend: React, TanStack Start, pnpm
@@ -44,8 +58,7 @@ uv sync --all-packages
 Run static verification:
 
 ```bash
-pnpm check
-uv run --package agent-core pytest packages/agent-core/tests
+pnpm verify
 ```
 
 Start local data services when needed:
@@ -62,6 +75,8 @@ pnpm api:dev
 pnpm worker:dev
 ```
 
+For the MVP flow, run the API and web app in separate terminals, then open the web app and create a run from `/meetings`.
+
 ## Documentation
 
 - [Implementation plan](docs/implementation-plan.md)
@@ -71,4 +86,3 @@ pnpm worker:dev
 - [ADR 003: FastAPI agent service](docs/adr/003-fastapi-agent-service.md)
 - [ADR 004: LangGraph and OpenRouter boundary](docs/adr/004-langgraph-openrouter.md)
 - [ADR 005: Railway multi-service deployment](docs/adr/005-railway-multiservice-deploy.md)
-

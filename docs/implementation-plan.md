@@ -1,6 +1,30 @@
 # Implementation Plan
 
+## Current Status
+
+Completed for the first local MVP:
+
+- repository, pnpm workspace, and uv workspace
+- TanStack Start web app with dashboard, meetings, run review, and settings routes
+- FastAPI run lifecycle endpoints
+- JSON-backed development run store
+- deterministic agent-core extraction and mock action proposal
+- approve/reject flow with mock external execution records
+- audit trail
+- Python tests for agent-core and agent-api
+
+Still pending for production readiness:
+
+- Better Auth and internal JWT boundary
+- Postgres migrations and durable relational schema
+- Redis-backed asynchronous worker execution
+- real LangGraph state machine and OpenRouter structured extraction
+- eval fixtures and report generation
+- Railway deployment validation
+
 ## Phase 1: Repository Foundations
+
+Status: Complete for MVP.
 
 Deliverables:
 
@@ -23,6 +47,8 @@ Done when:
 
 ## Phase 2: Local Infrastructure
 
+Status: Scaffolded. Compose is present; the MVP currently uses JSON run storage until database migrations are added.
+
 Deliverables:
 
 - Postgres with pgvector
@@ -36,6 +62,8 @@ Done when:
 - The API can read required connection settings from env.
 
 ## Phase 3: Web App
+
+Status: MVP complete for transcript intake, run navigation, review, approval, and audit trail. Auth is still pending.
 
 Deliverables:
 
@@ -68,6 +96,8 @@ Done when:
 
 ## Phase 5: Backend API
 
+Status: MVP complete with JSON-backed state and sync run execution. Internal auth, DB persistence, and queue dispatch are pending.
+
 Initial endpoints:
 
 - `GET /health`
@@ -83,6 +113,8 @@ Done when:
 - Web calls are integrated through the internal auth boundary.
 
 ## Phase 6: Agent Core
+
+Status: MVP complete with deterministic mock extraction and action proposal. LangGraph and LLM-backed structured output are pending.
 
 Workflow:
 
@@ -154,6 +186,8 @@ Done when:
 
 ## Phase 10: Review UI
 
+Status: MVP complete.
+
 Done when:
 
 - A transcript can be entered from the UI.
@@ -190,4 +224,3 @@ Done when:
 
 - Architecture, ADRs, tradeoffs, setup, demo flow, and future work are documented.
 - The repository can be shown as a coherent production-style project.
-
