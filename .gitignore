@@ -1,0 +1,29 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+.pnpm-store/
+.turbo/
+.vite/
+dist/
+.output/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Build and coverage
+coverage/
+htmlcov/
+*.log
+
+# Generated locally
+tmp/
+

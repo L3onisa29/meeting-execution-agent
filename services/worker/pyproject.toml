@@ -1,0 +1,17 @@
+[project]
+name = "agent-worker"
+version = "0.1.0"
+description = "Background worker for meeting execution agent jobs."
+requires-python = ">=3.12"
+dependencies = [
+  "agent-core",
+  "pydantic-settings>=2.10.0",
+  "redis>=5.2.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+agent-core = { workspace = true }
+

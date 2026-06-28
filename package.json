@@ -1,0 +1,16 @@
+{
+  "name": "meeting-execution-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.5.0",
+  "scripts": {
+    "api:dev": "uv run --directory services/agent-api uvicorn app.main:app --reload",
+    "build": "pnpm --filter @meeting-execution-agent/web build",
+    "check": "pnpm --filter @meeting-execution-agent/web check",
+    "test:python": "uv run --package agent-core pytest packages/agent-core/tests",
+    "verify": "pnpm check && pnpm test:python",
+    "web:dev": "pnpm --filter @meeting-execution-agent/web dev",
+    "worker:dev": "uv run --directory services/worker python -m app.main"
+  }
+}
