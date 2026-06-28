@@ -64,7 +64,7 @@ pnpm verify
 Start local data services when needed:
 
 ```bash
-docker compose -f infra/compose.db.yml up -d
+pnpm infra:local:up
 ```
 
 ## Service Commands
@@ -76,6 +76,35 @@ pnpm worker:dev
 ```
 
 For the MVP flow, run the API and web app in separate terminals, then open the web app and create a run from `/meetings`.
+
+## Infrastructure Commands
+
+Local containers:
+
+```bash
+pnpm infra:local:up       # start Postgres + Redis
+pnpm infra:local:stop     # stop containers, keep them created
+pnpm infra:local:down     # stop and remove containers, keep volumes
+pnpm infra:local:refresh  # pull images and recreate containers
+pnpm infra:local:reset    # remove containers and volumes
+pnpm infra:local:ps
+pnpm infra:local:logs
+```
+
+VPS containers use the same compose file, but read `.env.vps` and use a fixed compose project name:
+
+```bash
+cp .env.vps.example .env.vps
+pnpm infra:vps:up
+pnpm infra:vps:stop
+pnpm infra:vps:down
+pnpm infra:vps:refresh
+pnpm infra:vps:reset
+pnpm infra:vps:ps
+pnpm infra:vps:logs
+```
+
+By default, Postgres and Redis bind to `127.0.0.1` through `POSTGRES_PORT_BIND` and `REDIS_PORT_BIND`, which is the expected VPS posture unless a private network or firewall rule is configured.
 
 ## Documentation
 
